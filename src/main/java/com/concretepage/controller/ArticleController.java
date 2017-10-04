@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.concretepage.entity.Article;
@@ -50,8 +51,9 @@ public class ArticleController {
 	}
 
 	//@RequestMapping(value = "/viewList", method = RequestMethod.GET)
-	@RequestMapping(value = "/viewList")
-	public String viewList() {
+	@RequestMapping(value = "/viewList", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView viewList() {
 		System.out.println("index page request.");
 
 		//model.addAttribute("return", articleService.getAllArticles());
@@ -59,7 +61,9 @@ public class ArticleController {
 		//return "forward:/resources/viewList.html";
 		//String res = "forward:/resources/viewList.html";
 
-		return "viewList.html";
+		//return "viewList.html";
+		ModelAndView modelAndView = new ModelAndView("viewList");
+		return modelAndView;
 	}
 
 	@GetMapping("/error")

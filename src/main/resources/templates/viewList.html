@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Articles application</title>
+
+    <script src="resources/jquery/jquery-1.11.1.min.js"></script>
+    <script src="resources/jquery/jquery-ui.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
+
+    <style type="text/css">
+        h1 {
+            color: cadetblue;
+            font-family: Andalus;
+            font-size: larger;
+        }
+
+        body {
+            color: orangered;
+            font-family: "Arial Black";
+            font-size: large;
+        }
+
+        #articles {
+            color: crimson;
+            font-family: "Baskerville Old Face";
+            font-stretch: extra-expanded;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <h1>THIS IS MY FIRST APP</h1>
+</div>
+<div>
+    <table id="articles" border="1">
+        <tr>
+            <th>Article ID</th>
+            <th>Title</th>
+            <th>Category</th>
+        </tr>
+        <tr>
+            <td>1st columne</td>
+            <td>2nd columne</td>
+            <td>3rd columne</td>
+        </tr>
+    </table>
+</div>
+</body>
+
+<script>
+    var service = 'http://localhost:8080/';
+
+    $(document).ready(function () {
+        jQuery.support.cors = true;
+
+        $.ajax(
+            {
+                type: "GET",
+                url: service + "user/articles",
+//                data: "[{'articleId':'1', 'title':'Title in first item', 'category':'java'}]",
+                data: {
+                    "articleId": ["LUSAKA", "HARARE", "nesto trece"],
+                    "title": ["ZAMBIA", "ZIMBABWE", "nesto peto"],
+                    "category": ["ZAMBIA", "ZIMBABWE", "nesto sesto"]
+                },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                var: msgText = "this is my text  ",
+                success: function (data) {
+                    var trHTML = 'start';
+
+                    msgText = msgText + trHTML;
+
+                    $.each(data.articleId, function (i, item) {
+                        trHTML += '<tr><td>' + item + '</td><td>' + data.title[i] + '</td><td>' + data.category[i] + '</td></tr>';
+                    });
+
+                    $('#articles').append(trHTML);
+                },
+                error: function (msg) {
+                    alert("THIS IS ERROR MESSAGE: " + msgText + msg.responseText);
+                }
+            }
+        )
+    })
+
+
+</script>
+
+</html>
