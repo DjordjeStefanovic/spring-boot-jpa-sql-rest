@@ -5,9 +5,9 @@
     <meta charset="UTF-8"/>
     <title>Articles application</title>
 
-    <script src="resources/jquery/jquery-1.11.1.min.js"></script>
-    <script src="resources/jquery/jquery-ui.min.js"></script>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
+    <!--<script src="resources/jquery/jquery-1.11.1.min.js"></script>-->
+    <!--<script src="resources/jquery/jquery-ui.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
     <style type="text/css">
         h1 {
@@ -53,7 +53,7 @@
 <script>
     var service = 'http://localhost:8080/';
 
-    $(document).ready(function () {
+    $(function () {
         jQuery.support.cors = true;
 
         $.ajax(
@@ -61,28 +61,33 @@
                 type: "GET",
                 url: service + "user/articles",
 //                data: "[{'articleId':'1', 'title':'Title in first item', 'category':'java'}]",
-                data: {
-                    "articleId": ["LUSAKA", "HARARE", "nesto trece"],
-                    "title": ["ZAMBIA", "ZIMBABWE", "nesto peto"],
-                    "category": ["ZAMBIA", "ZIMBABWE", "nesto sesto"]
-                },
+//                data: {
+//                    "articleId": ["LUSAKA", "HARARE", "nesto trece"],
+//                    "title": ["ZAMBIA", "ZIMBABWE", "nesto peto"],
+//                    "category": ["ZAMBIA", "ZIMBABWE", "nesto sesto"]
+//                },
+                data: {},
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
                 var: msgText = "this is my text  ",
+                var: counter = "",
                 success: function (data) {
-                    var trHTML = 'start';
+                    alert("data" + data.toString())
+
+                    var trHTML = '';
 
                     msgText = msgText + trHTML;
 
-                    $.each(data.articleId, function (i, item) {
-                        trHTML += '<tr><td>' + item + '</td><td>' + data.title[i] + '</td><td>' + data.category[i] + '</td></tr>';
+                    $.each(data, function (i, item) {
+                        counter = i.toString();
+                        trHTML += '<tr><td>' + data[i].articleId + '</td><td>' + data[i].title + '</td><td>' + data[i].category + '</td></tr>';
                     });
 
                     $('#articles').append(trHTML);
                 },
                 error: function (msg) {
-                    alert("THIS IS ERROR MESSAGE: " + msgText + msg.responseText);
+                    alert("THIS IS ERROR MESSAGE: " + counter + ", " + msg.responseText);
                 }
             }
         )
