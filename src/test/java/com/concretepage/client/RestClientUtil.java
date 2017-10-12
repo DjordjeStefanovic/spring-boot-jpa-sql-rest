@@ -96,7 +96,7 @@ public class RestClientUtil {
     public static void main(String args[]) {
     	RestClientUtil util = new RestClientUtil();
         //util.getArticleByIdDemo();
-    	util.getAllArticlesDemo();
+    	//util.getAllArticlesDemo();
     	//util.addArticleDemo();
     	//util.updateArticleDemo();
     	//util.deleteArticleDemo();

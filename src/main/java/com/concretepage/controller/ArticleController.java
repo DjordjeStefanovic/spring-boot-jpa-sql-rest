@@ -6,13 +6,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.concretepage.entity.Article;
@@ -52,5 +48,27 @@ public class ArticleController {
 	public ResponseEntity<Void> deleteArticle(@PathVariable("id") Integer id) {
 		articleService.deleteArticle(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-	}	
-} 
+	}
+
+	//@RequestMapping(value = "/viewList", method = RequestMethod.GET)
+	@RequestMapping(value = "/viewList", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView viewList() {
+		System.out.println("index page request.");
+
+		//model.addAttribute("return", articleService.getAllArticles());
+
+		//return "forward:/resources/viewList.html";
+		//String res = "forward:/resources/viewList.html";
+
+		//return "viewList.html";
+		ModelAndView modelAndView = new ModelAndView("viewList");
+		return modelAndView;
+	}
+
+	@GetMapping("/error")
+	public ResponseEntity<Void>  error(Model model) {
+		System.out.println("/error happened");
+		return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+}
