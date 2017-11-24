@@ -24,7 +24,7 @@ public class ArticleController {
 		Article article = articleService.getArticleById(id);
 		return new ResponseEntity<Article>(article, HttpStatus.OK);
 	}
-	@GetMapping("article")
+	@GetMapping("articles")
 	public ResponseEntity<List<Article>> getAllArticles() {
 		System.out.println("@GetMapping(\"article\"): getAllArticles");
 		List<Article> list = articleService.getAllArticles();
