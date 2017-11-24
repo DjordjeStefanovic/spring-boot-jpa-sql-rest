@@ -48,7 +48,6 @@
         </tr>
     </table>
 </div>
-</body>
 
 <script>
     var service = 'http://localhost:8080/';
@@ -59,7 +58,7 @@
         $.ajax(
             {
                 type: "GET",
-                url: service + "user/articles",
+                url: service + "user/article",
 //                data: "[{'articleId':'1', 'title':'Title in first item', 'category':'java'}]",
 //                data: {
 //                    "articleId": ["LUSAKA", "HARARE", "nesto trece"],
@@ -73,17 +72,17 @@
                 var: msgText = "this is my text  ",
                 var: counter = "",
                 success: function (data) {
-                    alert("data" + data.toString());
+                    //alert("data" + data.toString());
 
                     var trHTML = '';
 
-                    msgText = msgText + trHTML;
+                    //msgText = msgText + trHTML;
 
                     $.each(data, function (i, item) {
                         counter = i.toString();
-                        alert("item " + i + ": " + item.articleId);
+                        //alert("item " + i + ": " + item.articleId);
                         //THIS WORKS, SAME AS item: trHTML += '<tr><td>' + data[i].articleId + '</td><td>' + data[i].title + '</td><td>' + data[i].category + '</td></tr>';
-                        trHTML += '<tr><td>' + item.articleId + '</td><td>' + item.title + '</td><td>' + item.category + '</td></tr>';
+                        trHTML += '<tr><td>' + '[DB_id:' + (item.id).toString() + '] ' + item.articleId + '</td><td>' + item.title + '</td><td>' + item.category + '</td></tr>';
                     });
 
 
@@ -99,5 +98,8 @@
 
 
 </script>
+</body>
+
+
 
 </html>

@@ -7,7 +7,7 @@
 	<artifactId>spring-boot-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>spring-demo</name>
+	<name>spring-boot-demo</name>
 	<description>Spring Boot Demo Project</description>
 
 	<parent>
